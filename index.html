@@ -3,888 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REGISTRO FOTOGRÁFICO · EMEF Maria Regiana da Silva</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Galeria 2026 · EMEF Maria Regiana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #2d7a4a;
       --primary-dark: #1a4d2e;
-      --primary-light: #e8f5ed;
       --accent: #f59e0b;
-      --text: #1f2937;
-      --text-sec: #6b7280;
-      --border: #e5e7eb;
-      --bg: #f9fafb;
+      --bg: #f3f4f6;
       --white: #ffffff;
+      --danger: #ef4444;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Sora', sans-serif; background: var(--bg); color: #1f2937; }
 
-    body {
-      font-family: 'Sora', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+    /* Login */
+    #login-screen {
+      position: fixed; inset: 0; background: var(--primary); 
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
     }
-
-    /* LOGIN SCREEN */
-    .login-screen {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
+    .login-box {
+      background: var(--white); padding: 2rem; border-radius: 1rem; 
+      text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 90%; max-width: 400px;
     }
-
-    .login-screen.hidden {
-      display: none;
+    .btn {
+      display: block; width: 100%; padding: 0.8rem; margin-top: 1rem;
+      border: none; border-radius: 0.5rem; cursor: pointer; font-weight: 600; transition: 0.3s;
     }
+    .btn-admin { background: var(--primary); color: white; }
+    .btn-visitor { background: #e5e7eb; color: #374151; }
 
-    .login-card {
-      background: white;
-      border-radius: 20px;
-      padding: 40px 32px;
-      width: 90%;
-      max-width: 380px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    /* Layout */
+    header { background: var(--white); padding: 1.5rem; text-align: center; border-bottom: 2px solid #e5e7eb; }
+    .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+    
+    .grid-turmas {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;
     }
-
-    .login-icon {
-      font-size: 48px;
-      text-align: center;
-      margin-bottom: 20px;
+    .card-turma {
+      background: var(--white); padding: 1.5rem; border-radius: 0.8rem;
+      cursor: pointer; border: 1px solid #e5e7eb; transition: 0.3s;
     }
+    .card-turma:hover { transform: translateY(-5px); border-color: var(--primary); }
 
-    .login-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text);
-      text-align: center;
-      margin-bottom: 8px;
+    /* Modal Alunos */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7); 
+      display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 900;
     }
-
-    .login-subtitle {
-      font-size: 13px;
-      color: var(--text-sec);
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .login-input {
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 14px;
-      font-family: 'Sora', sans-serif;
-      transition: all 0.2s;
-    }
-
-    .login-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(45, 122, 74, 0.1);
-    }
-
-    .login-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .login-btn {
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Sora', sans-serif;
-    }
-
-    .login-btn-admin {
-      background: var(--primary);
-      color: white;
-    }
-
-    .login-btn-admin:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-    }
-
-    .login-btn-visitor {
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1.5px solid var(--primary);
-    }
-
-    .login-btn-visitor:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .login-error {
-      background: #fee2e2;
-      color: #7f1d1d;
-      border: 1px solid #fca5a5;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 12px;
-      margin-bottom: 12px;
-      display: none;
-    }
-
-    .login-error.show {
-      display: block;
-    }
-
-    /* HEADER */
-    .header {
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      color: white;
-      padding: 28px 24px;
-      box-shadow: 0 4px 20px rgba(26, 77, 46, 0.15);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .header-icon {
-      font-size: 40px;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 12px;
-    }
-
-    .header-text h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header-text p {
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    .header-right {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .badge {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .logout-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: 1.5px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      font-family: 'Sora', sans-serif;
-      transition: all 0.2s;
-    }
-
-    .logout-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    /* MAIN */
-    .main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 36px 24px;
-    }
-
-    .status-bar {
-      padding: 14px 18px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 28px;
-      background: #d1fae5;
-      color: #047857;
-      border: 1px solid #a7f3d0;
-    }
-
-    /* TURMAS GRID */
-    .turmas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-
-    .turma-card {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .turma-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(45, 122, 74, 0.15);
-    }
-
-    .turma-header {
-      background: linear-gradient(135deg, var(--primary-light), rgba(45, 122, 74, 0.05));
-      padding: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .turma-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-
-    .turma-stats {
-      display: flex;
-      gap: 16px;
-      font-size: 12px;
-      color: var(--text-sec);
-    }
-
-    .turma-body {
-      padding: 18px;
-    }
-
-    .alunos-preview {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .aluno-preview {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      background: var(--bg);
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--primary-light), #cce5db);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--primary);
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .turma-btn {
-      width: 100%;
-      padding: 12px;
-      border: 1.5px solid var(--primary);
-      border-radius: 10px;
-      background: var(--primary);
-      color: white;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Sora', sans-serif;
-    }
-
-    .turma-btn:hover {
-      background: var(--primary-dark);
-    }
-
-    .turma-btn.disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 40px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
     .modal-content {
-      background: white;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 700px;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      background: var(--white); width: 100%; max-width: 800px; max-height: 90vh;
+      border-radius: 1rem; overflow-y: auto; padding: 2rem; position: relative;
     }
+    .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; }
 
-    .modal-header {
-      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      color: white;
-      padding: 24px;
-      border-radius: 20px 20px 0 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    .aluno-item {
+      display: flex; align-items: center; gap: 1rem; padding: 1rem;
+      border-bottom: 1px solid #f3f4f6;
     }
-
-    .modal-header h2 {
-      font-size: 22px;
-      font-weight: 700;
+    .aluno-foto {
+      width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+      background: #e5e7eb; border: 2px solid var(--primary);
     }
-
-    .modal-close {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      font-size: 20px;
-      cursor: pointer;
+    .admin-controls {
+      margin-top: 1rem; padding: 1rem; background: #f9fafb; border-radius: 0.5rem;
     }
-
-    .modal-close:hover {
-      background: rgba(255, 255, 255, 0.3);
+    input[type="text"] {
+      width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 0.4rem;
     }
-
-    .modal-body {
-      padding: 24px;
-    }
-
-    .alunos-list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .aluno-card {
-      display: flex;
-      gap: 14px;
-      padding: 14px;
-      background: var(--bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      transition: all 0.2s;
-    }
-
-    .aluno-card:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-    }
-
-    .foto-box {
-      width: 80px;
-      height: 80px;
-      border-radius: 12px;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, var(--primary-light), #cce5db);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .foto-box:hover {
-      border-color: var(--primary);
-      transform: scale(1.05);
-    }
-
-    .foto-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .foto-placeholder {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .foto-input {
-      display: none;
-    }
-
-    .aluno-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .aluno-info-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .badge-status {
-      display: inline-flex;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 4px;
-      width: fit-content;
-    }
-
-    .badge-status.com {
-      background: #d1fae5;
-      color: #047857;
-    }
-
-    .badge-status.sem {
-      background: #fef3c7;
-      color: #b45309;
-    }
-
-    .progress-section {
-      margin-top: 24px;
-      padding: 16px;
-      background: var(--bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      display: none;
-    }
-
-    .progress-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transition: width 0.3s ease;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    .modal-btn {
-      flex: 1;
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Sora', sans-serif;
-      transition: all 0.2s;
-    }
-
-    .modal-btn.save {
-      background: var(--primary);
-      color: white;
-    }
-
-    .modal-btn.save:hover {
-      background: var(--primary-dark);
-    }
-
-    .modal-btn.close {
-      background: var(--bg);
-      color: var(--text);
-      border: 1.5px solid var(--border);
-    }
-
-    .modal-btn.close:hover {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    @media (max-width: 768px) {
-      .turmas-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .modal-content {
-        width: 95%;
-      }
-
-      .login-card {
-        width: 95%;
-      }
-    }
+    .btn-del { color: var(--danger); background: none; border: none; cursor: pointer; font-size: 0.8rem; }
   </style>
 </head>
 <body>
-  <!-- LOGIN -->
-  <div class="login-screen" id="login-screen">
-    <div class="login-card">
-      <div class="login-icon">📸</div>
-      <div class="login-title">Galeria de Fotos</div>
-      <div class="login-subtitle">EMEF Maria Regiana da Silva</div>
-      
-      <div class="login-error" id="login-error"></div>
 
-      <div class="login-form">
-        <input type="password" id="password-input" class="login-input" placeholder="Senha do administrador" onkeypress="if(event.key==='Enter') loginAdmin()">
-      </div>
-
-      <div class="login-buttons">
-        <button class="login-btn login-btn-admin" onclick="loginAdmin()">🔐 Admin</button>
-        <button class="login-btn login-btn-visitor" onclick="loginVisitor()">👁 Visitante</button>
-      </div>
+  <div id="login-screen">
+    <div class="login-box">
+      <h2>Escola Maria Regiana</h2>
+      <p>Registro Fotográfico 2026</p>
+      <button class="btn btn-admin" onclick="login('admin')">Acesso Coordenador (Admin)</button>
+      <button class="btn btn-visitor" onclick="login('visitor')">Acesso Visitante</button>
     </div>
   </div>
 
-  <!-- APP -->
-  <div id="app" style="display: none;">
-    <!-- HEADER -->
-    <div class="header">
-      <div class="header-content">
-        <div class="header-left">
-          <div class="header-icon">📸</div>
-          <div class="header-text">
-            <h1>Galeria de Fotos</h1>
-            <p>EMEF Maria Regiana da Silva</p>
-          </div>
-        </div>
-        <div class="header-right">
-          <div class="badge" id="user-badge">👤 Visitante</div>
-          <button class="logout-btn" onclick="logout()">Sair</button>
-        </div>
-      </div>
-    </div>
+  <header>
+    <h1>Galeria Escolar 2026</h1>
+    <p id="user-status"></p>
+  </header>
 
-    <!-- MAIN -->
-    <div class="main">
-      <div id="status-container"></div>
-      <div id="turmas-container" class="turmas-grid"></div>
-    </div>
+  <div class="container">
+    <div id="lista-turmas" class="grid-turmas"></div>
   </div>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modal-turma">
+  <div id="modal-turma" class="modal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modal-title">Turma</h2>
-        <button class="modal-close" onclick="fecharModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="alunos-list" id="alunos-list"></div>
-        <div class="progress-section" id="progress-section">
-          <div class="progress-label">
-            <span>Progresso</span>
-            <span id="progress-text">0 de 0</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress-bar"></div>
-          </div>
-        </div>
-        <div class="modal-actions" id="modal-actions"></div>
-      </div>
+      <span class="close-modal" onclick="fecharModal()">&times;</span>
+      <h2 id="modal-titulo"></h2>
+      <div id="admin-add-area"></div> <div id="lista-alunos"></div>
     </div>
   </div>
 
   <script>
     let dados = { turmas: [], alunos: [] };
-    let isAdmin = false;
-    let turmaAtiva = null;
-    let alunosEditar = [];
+    let userRole = 'visitor';
 
+    // 1. LOGIN
+    function login(role) {
+      userRole = role;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('user-status').innerText = role === 'admin' ? "Modo: Administrador" : "Modo: Visitante";
+      carregarDados();
+    }
+
+    // 2. CARREGAR DADOS
     async function carregarDados() {
-      try {
-        const response = await fetch('dados_alunos.json');
-        const data = await response.json();
-        dados = { turmas: data.turmas, alunos: data.alunos };
-        console.log(`✓ Carregados: ${data.total_turmas} turmas, ${data.total_alunos} alunos`);
-        carregarLocal();
-      } catch (err) {
-        console.error('Erro ao carregar dados:', err);
-        alert('⚠️ Certifique-se de que o arquivo dados_alunos.json está na mesma pasta.');
-      }
-    }
-
-    function loginAdmin() {
-      const password = document.getElementById('password-input').value;
-      if (password === '2026') {
-        isAdmin = true;
-        entrarApp();
+      const salvos = localStorage.getItem('maria_regiana_2026');
+      if (salvos) {
+        dados = JSON.parse(salvos);
       } else {
-        mostrarErro('❌ Senha incorreta! Use "2026".');
+        try {
+          const resp = await fetch('dados_alunos.json');
+          dados = await resp.json();
+          salvar();
+        } catch (e) { console.error("Arquivo JSON não encontrado, iniciando vazio."); }
       }
+      renderizarTurmas();
     }
 
-    function loginVisitor() {
-      isAdmin = false;
-      entrarApp();
+    function salvar() {
+      localStorage.setItem('maria_regiana_2026', JSON.stringify(dados));
     }
 
-    function mostrarErro(msg) {
-      const errorEl = document.getElementById('login-error');
-      errorEl.textContent = msg;
-      errorEl.classList.add('show');
-      setTimeout(() => errorEl.classList.remove('show'), 4000);
+    // 3. RENDERIZAR TURMAS
+    function renderizarTurmas() {
+      const container = document.getElementById('lista-turmas');
+      container.innerHTML = dados.turmas.map(t => `
+        <div class="card-turma" onclick="abrirTurma('${t.id}')">
+          <h3>${t.nome}</h3>
+          <p>Prof: ${t.professor || 'Não definido'}</p>
+        </div>
+      `).join('');
     }
 
-    function entrarApp() {
-      document.getElementById('login-screen').classList.add('hidden');
-      document.getElementById('app').style.display = 'block';
-      document.getElementById('user-badge').textContent = isAdmin ? '🔐 Administrador' : '👁 Visitante';
-      renderizar();
-    }
-
-    function logout() {
-      if (confirm('Deseja sair?')) {
-        isAdmin = false;
-        turmaAtiva = null;
-        alunosEditar = [];
-        document.getElementById('login-screen').classList.remove('hidden');
-        document.getElementById('app').style.display = 'none';
-        document.getElementById('password-input').value = '';
-      }
-    }
-
-    function renderizar() {
-      const container = document.getElementById('turmas-container');
-      container.innerHTML = '';
-
-      dados.turmas.forEach(turma => {
-        const alunos = dados.alunos.filter(a => a.turmaId === turma.id);
-        const comFoto = alunos.filter(a => a.foto).length;
-        const totalAlunos = alunos.length;
-
-        const card = document.createElement('div');
-        card.className = 'turma-card';
-
-        const preview = alunos.slice(0, 3).map(aluno => `
-          <div class="aluno-preview">
-            <div class="avatar">
-              ${aluno.foto ? `<img src="${aluno.foto}">` : getInitiais(aluno.nome)}
-            </div>
-            <div style="flex: 1; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${aluno.nome}</div>
-            <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 600; background: ${aluno.foto ? '#d1fae5' : '#fef3c7'}; color: ${aluno.foto ? '#047857' : '#b45309'};">${aluno.foto ? '✓' : '⚠'}</span>
-          </div>
-        `).join('');
-
-        card.innerHTML = `
-          <div class="turma-header">
-            <div class="turma-name">🎓 ${turma.nome}</div>
-            <div class="turma-stats">
-              <div>👥 ${totalAlunos}</div>
-              <div>📸 ${comFoto}</div>
-            </div>
-          </div>
-          <div class="turma-body">
-            <div class="alunos-preview">${preview}</div>
-            ${totalAlunos > 3 ? `<div style="text-align: center; font-size: 12px; color: var(--text-sec); padding: 8px;">... e ${totalAlunos - 3} alunos mais</div>` : ''}
-            <button class="turma-btn ${!isAdmin ? 'disabled' : ''}" onclick="abrirTurma('${turma.id}')" ${!isAdmin ? 'disabled' : ''}>
-              ⚙ Gerenciar (${comFoto}/${totalAlunos})
-            </button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
+    // 4. ABRIR TURMA E LISTAR ALUNOS
     function abrirTurma(turmaId) {
-      if (!isAdmin) return;
-
-      turmaAtiva = dados.turmas.find(t => t.id === turmaId);
-      alunosEditar = dados.alunos.filter(a => a.turmaId === turmaId).map(a => ({ ...a }));
-
-      document.getElementById('modal-title').textContent = turmaAtiva.nome;
-
-      const list = document.getElementById('alunos-list');
-      list.innerHTML = '';
-
-      alunosEditar.forEach((aluno, idx) => {
-        const item = document.createElement('div');
-        item.className = 'aluno-card';
-        item.innerHTML = `
-          <div class="foto-box" onclick="uploadFoto(${idx})">
-            ${aluno.foto ? `<img src="${aluno.foto}">` : `<div class="foto-placeholder">${getInitiais(aluno.nome)}</div>`}
+      const turma = dados.turmas.find(t => t.id === turmaId);
+      document.getElementById('modal-titulo').innerText = turma.nome;
+      document.getElementById('modal-turma').style.display = 'flex';
+      
+      const addArea = document.getElementById('admin-add-area');
+      if (userRole === 'admin') {
+        addArea.innerHTML = `
+          <div class="admin-controls">
+            <h4>Adicionar Novo Aluno</h4>
+            <input type="text" id="novo-nome" placeholder="Nome completo">
+            <button class="btn btn-admin" onclick="addAluno('${turmaId}')">Cadastrar Aluno</button>
           </div>
-          <div class="aluno-info">
-            <div class="aluno-info-name">${aluno.nome}</div>
-            <div style="font-size: 12px; color: var(--text-sec); margin-bottom: 6px;">ID: ${aluno.id}</div>
-            <span class="badge-status ${aluno.foto ? 'com' : 'sem'}">
-              ${aluno.foto ? '✓ Com foto' : '⚠️ Sem foto'}
-            </span>
-          </div>
-          <input type="file" id="file-${idx}" class="foto-input" accept="image/*" onchange="handleFotoUpload(${idx}, this)">
         `;
-        list.appendChild(item);
-      });
+      } else {
+        addArea.innerHTML = "";
+      }
 
-      atualizarProgresso();
-      atualizarBotoes();
-      document.getElementById('modal-turma').classList.add('active');
+      renderizarAlunos(turmaId);
+    }
+
+    function renderizarAlunos(turmaId) {
+      const lista = document.getElementById('lista-alunos');
+      const alunosDaTurma = dados.alunos.filter(a => a.turmaId === turmaId);
+
+      lista.innerHTML = alunosDaTurma.map(a => `
+        <div class="aluno-item">
+          <img src="${a.foto || 'https://via.placeholder.com/60'}" class="aluno-foto">
+          <div style="flex:1">
+            <strong>${a.nome}</strong>
+            ${userRole === 'admin' ? `
+              <input type="text" placeholder="Link da foto (Google Fotos)" 
+                onchange="atualizarFoto('${a.id}', this.value)" value="${a.foto || ''}">
+              <button class="btn-del" onclick="removerAluno('${a.id}', '${turmaId}')">Excluir Aluno</button>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 5. FUNÇÕES ADMIN
+    function addAluno(turmaId) {
+      const nome = document.getElementById('novo-nome').value;
+      if (!nome) return;
+      const novo = { id: "aluno_" + Date.now(), turmaId: turmaId, nome: nome, foto: null };
+      dados.alunos.push(novo);
+      salvar();
+      renderizarAlunos(turmaId);
+      document.getElementById('novo-nome').value = "";
+    }
+
+    function atualizarFoto(alunoId, link) {
+      const aluno = dados.alunos.find(a => a.id === alunoId);
+      if (aluno) {
+        aluno.foto = link;
+        salvar();
+      }
+    }
+
+    function removerAluno(alunoId, turmaId) {
+      if (confirm("Deseja remover este aluno?")) {
+        dados.alunos = dados.alunos.filter(a => a.id !== alunoId);
+        salvar();
+        renderizarAlunos(turmaId);
+      }
     }
 
     function fecharModal() {
-      document.getElementById('modal-turma').classList.remove('active');
-      turmaAtiva = null;
-      alunosEditar = [];
+      document.getElementById('modal-turma').style.display = 'none';
     }
-
-    function uploadFoto(idx) {
-      document.getElementById(`file-${idx}`).click();
-    }
-
-    function handleFotoUpload(idx, input) {
-      if (!input.files[0]) return;
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        alunosEditar[idx].foto = e.target.result;
-        abrirTurma(turmaAtiva.id);
-        mostrarMensagem('✓ Foto adicionada!');
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-
-    function atualizarProgresso() {
-      const comFoto = alunosEditar.filter(a => a.foto).length;
-      const total = alunosEditar.length;
-      const pct = total ? Math.round((comFoto / total) * 100) : 0;
-
-      document.getElementById('progress-section').style.display = 'block';
-      document.getElementById('progress-text').textContent = `${comFoto} de ${total} (${pct}%)`;
-      document.getElementById('progress-bar').style.width = `${pct}%`;
-    }
-
-    function salvarTurma() {
-      if (!confirm('💾 Salvar todas as fotos desta turma?')) return;
-
-      alunosEditar.forEach(aluno => {
-        const idx = dados.alunos.findIndex(a => a.id === aluno.id);
-        if (idx >= 0) dados.alunos[idx].foto = aluno.foto;
-      });
-
-      salvarLocal();
-      mostrarMensagem('✓ Turma salva com sucesso!');
-      fecharModal();
-      renderizar();
-    }
-
-    function atualizarBotoes() {
-      document.getElementById('modal-actions').innerHTML = `
-        <button class="modal-btn save" onclick="salvarTurma()">💾 Salvar Fotos</button>
-        <button class="modal-btn close" onclick="fecharModal()">Fechar</button>
-      `;
-    }
-
-    function getInitiais(nome) {
-      return nome.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
-    }
-
-    function mostrarMensagem(texto) {
-      const container = document.getElementById('status-container');
-      const msg = document.createElement('div');
-      msg.className = 'status-bar';
-      msg.textContent = texto;
-      container.appendChild(msg);
-      setTimeout(() => msg.remove(), 3000);
-    }
-
-    function salvarLocal() {
-      localStorage.setItem('galeria_fotos', JSON.stringify(dados));
-    }
-
-    function carregarLocal() {
-      const saved = localStorage.getItem('galeria_fotos');
-      if (saved) dados.alunos = JSON.parse(saved).alunos;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      carregarDados();
-      document.getElementById('modal-turma').addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) fecharModal();
-      });
-    });
   </script>
 </body>
 </html>
