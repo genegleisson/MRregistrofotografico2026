@@ -11,7 +11,6 @@
       --primary-dark: #1a4d2e;
       --primary-light: #e8f5ed;
       --accent: #f59e0b;
-      --danger: #dc2626;
       --text: #1f2937;
       --text-sec: #6b7280;
       --border: #e5e7eb;
@@ -32,6 +31,127 @@
       line-height: 1.6;
     }
 
+    /* LOGIN SCREEN */
+    .login-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .login-screen.hidden {
+      display: none;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 32px;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-icon {
+      font-size: 48px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--text-sec);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-input {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: 'Sora', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(45, 122, 74, 0.1);
+    }
+
+    .login-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .login-btn {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Sora', sans-serif;
+    }
+
+    .login-btn-admin {
+      background: var(--primary);
+      color: white;
+    }
+
+    .login-btn-admin:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .login-btn-visitor {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+
+    .login-btn-visitor:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .login-error {
+      background: #fee2e2;
+      color: #7f1d1d;
+      border: 1px solid #fca5a5;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .login-error.show {
+      display: block;
+    }
+
     /* HEADER */
     .header {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
@@ -45,102 +165,86 @@
       margin: 0 auto;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
       gap: 16px;
     }
 
     .header-icon {
       font-size: 40px;
+      width: 60px;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 60px;
-      height: 60px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 12px;
-      backdrop-filter: blur(4px);
     }
 
     .header-text h1 {
       font-size: 28px;
       font-weight: 700;
       margin-bottom: 4px;
-      letter-spacing: -0.5px;
     }
 
     .header-text p {
       font-size: 13px;
       opacity: 0.9;
-      font-weight: 500;
     }
 
     .header-right {
-      margin-left: auto;
       display: flex;
       gap: 12px;
       align-items: center;
-      flex-wrap: wrap;
     }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       background: rgba(255, 255, 255, 0.2);
       border: 1.5px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
       padding: 6px 12px;
       font-size: 12px;
       font-weight: 600;
-      backdrop-filter: blur(4px);
     }
 
-    /* MAIN CONTENT */
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* MAIN */
     .main {
       max-width: 1200px;
       margin: 0 auto;
       padding: 36px 24px;
     }
 
-    /* STATUS BAR */
     .status-bar {
       padding: 14px 18px;
       border-radius: 12px;
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      animation: slideIn 0.3s ease-out;
-    }
-
-    .status-bar.success {
       background: #d1fae5;
       color: #047857;
       border: 1px solid #a7f3d0;
-    }
-
-    .status-bar.info {
-      background: #dbeafe;
-      color: #0c4a6e;
-      border: 1px solid #93c5fd;
-    }
-
-    .status-bar.error {
-      background: #fee2e2;
-      color: #7f1d1d;
-      border: 1px solid #fca5a5;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* TURMAS GRID */
@@ -148,7 +252,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 24px;
-      margin-bottom: 40px;
     }
 
     .turma-card {
@@ -178,9 +281,6 @@
       font-weight: 700;
       color: var(--primary-dark);
       margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .turma-stats {
@@ -190,23 +290,17 @@
       color: var(--text-sec);
     }
 
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
     .turma-body {
       padding: 18px;
     }
 
-    .alunos-list {
+    .alunos-preview {
       display: grid;
       gap: 10px;
       margin-bottom: 16px;
     }
 
-    .aluno-item {
+    .aluno-preview {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -214,71 +308,27 @@
       background: var(--bg);
       border-radius: 10px;
       border: 1px solid var(--border);
-      transition: all 0.2s;
     }
 
-    .aluno-item:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-    }
-
-    .aluno-avatar {
-      width: 40px;
-      height: 40px;
+    .avatar {
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
       background: linear-gradient(135deg, var(--primary-light), #cce5db);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--primary);
       flex-shrink: 0;
       overflow: hidden;
     }
 
-    .aluno-avatar img {
+    .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .aluno-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .aluno-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .aluno-status {
-      font-size: 11px;
-      color: var(--text-sec);
-      margin-top: 2px;
-    }
-
-    .aluno-badge {
-      font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .badge-sem-foto {
-      background: #fef3c7;
-      color: #b45309;
-    }
-
-    .badge-com-foto {
-      background: #d1fae5;
-      color: #047857;
     }
 
     .turma-btn {
@@ -297,56 +347,37 @@
 
     .turma-btn:hover {
       background: var(--primary-dark);
-      border-color: var(--primary-dark);
     }
 
-    /* MODAL TURMA */
+    .turma-btn.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* MODAL */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
-      backdrop-filter: blur(2px);
-      animation: fadeIn 0.2s;
-    }
-
-    .modal-overlay.active {
-      display: flex;
       align-items: flex-start;
       justify-content: center;
       padding-top: 40px;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+    .modal-overlay.active {
+      display: flex;
     }
 
     .modal-content {
       background: white;
       border-radius: 20px;
       width: 90%;
-      max-width: 600px;
-      max-height: 90vh;
+      max-width: 700px;
+      max-height: 85vh;
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: slideUp 0.3s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .modal-header {
@@ -357,6 +388,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .modal-header h2 {
@@ -373,7 +407,6 @@
       border-radius: 8px;
       font-size: 20px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
     .modal-close:hover {
@@ -384,12 +417,12 @@
       padding: 24px;
     }
 
-    .alunos-detail-list {
+    .alunos-list {
       display: grid;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .aluno-detail {
+    .aluno-card {
       display: flex;
       gap: 14px;
       padding: 14px;
@@ -399,7 +432,7 @@
       transition: all 0.2s;
     }
 
-    .aluno-detail:hover {
+    .aluno-card:hover {
       background: var(--primary-light);
       border-color: var(--primary);
     }
@@ -415,7 +448,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -441,30 +473,22 @@
       display: none;
     }
 
-    .aluno-detail-info {
+    .aluno-info {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    .aluno-detail-name {
+    .aluno-info-name {
       font-size: 14px;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 4px;
     }
 
-    .aluno-detail-status {
-      font-size: 12px;
-      color: var(--text-sec);
-      margin-bottom: 6px;
-    }
-
-    .foto-indicator {
+    .badge-status {
       display: inline-flex;
-      align-items: center;
-      gap: 4px;
       font-size: 11px;
       font-weight: 600;
       padding: 4px 8px;
@@ -472,51 +496,46 @@
       width: fit-content;
     }
 
-    .foto-indicator.tem {
+    .badge-status.com {
       background: #d1fae5;
       color: #047857;
     }
 
-    .foto-indicator.sem {
+    .badge-status.sem {
       background: #fef3c7;
       color: #b45309;
     }
 
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Sora', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
+    .progress-section {
+      margin-top: 24px;
+      padding: 16px;
       background: var(--bg);
-      color: var(--text);
-      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display: none;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--primary);
-      background: var(--primary-light);
+    .progress-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.3s ease;
     }
 
     .modal-actions {
@@ -527,49 +546,38 @@
       border-top: 1px solid var(--border);
     }
 
-    /* PROGRESS */
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-top: 8px;
+    .modal-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Sora', sans-serif;
+      transition: all 0.2s;
     }
 
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transition: width 0.3s ease;
+    .modal-btn.save {
+      background: var(--primary);
+      color: white;
     }
 
-    .progress-text {
-      font-size: 12px;
-      color: var(--text-sec);
-      margin-top: 8px;
-      font-weight: 500;
+    .modal-btn.save:hover {
+      background: var(--primary-dark);
     }
 
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-sec);
-    }
-
-    .empty-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-
-    .empty-title {
-      font-size: 16px;
-      font-weight: 700;
+    .modal-btn.close {
+      background: var(--bg);
       color: var(--text);
-      margin-bottom: 6px;
+      border: 1.5px solid var(--border);
     }
 
-    /* RESPONSIVE */
+    .modal-btn.close:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
     @media (max-width: 768px) {
       .turmas-grid {
         grid-template-columns: 1fr;
@@ -580,127 +588,148 @@
         text-align: center;
       }
 
-      .header-right {
-        margin-left: 0;
-        justify-content: center;
-      }
-
       .modal-content {
         width: 95%;
-        margin: 0 auto;
+      }
+
+      .login-card {
+        width: 95%;
       }
     }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-content">
-      <div class="header-icon">📸</div>
-      <div class="header-text">
-        <h1>Galeria de Fotos</h1>
-        <p>EMEF Maria Regiana da Silva</p>
+  <!-- LOGIN -->
+  <div class="login-screen" id="login-screen">
+    <div class="login-card">
+      <div class="login-icon">📸</div>
+      <div class="login-title">Galeria de Fotos</div>
+      <div class="login-subtitle">EMEF Maria Regiana da Silva</div>
+      
+      <div class="login-error" id="login-error"></div>
+
+      <div class="login-form">
+        <input type="password" id="password-input" class="login-input" placeholder="Senha do administrador" onkeypress="if(event.key==='Enter') loginAdmin()">
       </div>
-      <div class="header-right">
-        <div class="badge">👤 <span id="user-info">Visitante</span></div>
-        <div class="badge" id="sync-status">☁ Pronto</div>
+
+      <div class="login-buttons">
+        <button class="login-btn login-btn-admin" onclick="loginAdmin()">🔐 Admin</button>
+        <button class="login-btn login-btn-visitor" onclick="loginVisitor()">👁 Visitante</button>
       </div>
     </div>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
-    <div id="status-container"></div>
-
-    <!-- TURMAS GRID -->
-    <div id="turmas-container" class="turmas-grid"></div>
-
-    <!-- EMPTY STATE -->
-    <div id="empty-state" class="empty-state" style="display: none;">
-      <div class="empty-icon">📚</div>
-      <div class="empty-title">Nenhuma turma cadastrada</div>
-      <p>Aguarde, as turmas serão carregadas do Google Drive...</p>
-    </div>
-  </div>
-
-  <!-- MODAL TURMA DETALHES -->
-  <div class="modal-overlay" id="modal-turma">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modal-turma-name">Turma</h2>
-        <button class="modal-close" onclick="fecharModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="alunos-detail-list" id="modal-alunos-list"></div>
-        <div class="modal-actions">
-          <button class="btn btn-primary" onclick="salvarTurma()" style="flex: 1;">💾 Salvar Fotos</button>
-          <button class="btn btn-secondary" onclick="fecharModal()" style="flex: 1;">Fechar</button>
+  <!-- APP -->
+  <div id="app" style="display: none;">
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <div class="header-icon">📸</div>
+          <div class="header-text">
+            <h1>Galeria de Fotos</h1>
+            <p>EMEF Maria Regiana da Silva</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="badge" id="user-badge">👤 Visitante</div>
+          <button class="logout-btn" onclick="logout()">Sair</button>
         </div>
       </div>
     </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div id="status-container"></div>
+      <div id="turmas-container" class="turmas-grid"></div>
+    </div>
   </div>
 
-  <script src="https://apis.google.com/js/client.js"></script>
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal-turma">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Turma</h2>
+        <button class="modal-close" onclick="fecharModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alunos-list" id="alunos-list"></div>
+        <div class="progress-section" id="progress-section">
+          <div class="progress-label">
+            <span>Progresso</span>
+            <span id="progress-text">0 de 0</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-bar"></div>
+          </div>
+        </div>
+        <div class="modal-actions" id="modal-actions"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ════════════════════════════════════════════════════════════════
-    // CONFIG E DADOS
-    // ════════════════════════════════════════════════════════════════
-    const CONFIG = {
-      CLIENT_ID: 'SEU_CLIENT_ID_AQUI',
-      API_KEY: 'SUA_API_KEY_AQUI',
-      SCOPES: 'https://www.googleapis.com/auth/drive.file'
-    };
-
-    let dados = {
-      turmas: [],
-      alunos: []
-    };
-
+    let dados = { turmas: [], alunos: [] };
+    let isAdmin = false;
     let turmaAtiva = null;
     let alunosEditar = [];
-    let isAdmin = false;
 
-    // ════════════════════════════════════════════════════════════════
-    // DADOS DE EXEMPLO (remover quando integrar Google Drive)
-    // ════════════════════════════════════════════════════════════════
-    function carregarDadosExemplo() {
-      dados = {
-        turmas: [
-          { id: '1', nome: '3º Ano A', professor: 'Ana Silva' },
-          { id: '2', nome: '3º Ano B', professor: 'Carlos Santos' },
-          { id: '3', nome: '4º Ano A', professor: 'Mariana Costa' }
-        ],
-        alunos: [
-          { id: 'a1', turmaId: '1', nome: 'Ana Carolina Silva', foto: null },
-          { id: 'a2', turmaId: '1', nome: 'Bruno Oliveira Santos', foto: null },
-          { id: 'a3', turmaId: '1', nome: 'Carla Mendes Rocha', foto: null },
-          { id: 'a4', turmaId: '1', nome: 'Daniel Costa Pereira', foto: null },
-          { id: 'a5', turmaId: '1', nome: 'Eduarda Silva Souza', foto: null },
-          { id: 'a6', turmaId: '2', nome: 'Felipe Martins Dias', foto: null },
-          { id: 'a7', turmaId: '2', nome: 'Gabriela Ferreira Lima', foto: null },
-          { id: 'a8', turmaId: '2', nome: 'Henrique Alves Costa', foto: null },
-          { id: 'a9', turmaId: '2', nome: 'Isabela Gomes Silva', foto: null },
-          { id: 'a10', turmaId: '2', nome: 'João Victor Santos', foto: null },
-          { id: 'a11', turmaId: '3', nome: 'Karen Ribeiro Oliveira', foto: null },
-          { id: 'a12', turmaId: '3', nome: 'Leonardo Barbosa Costa', foto: null },
-          { id: 'a13', turmaId: '3', nome: 'Mariana Rocha Silva', foto: null },
-          { id: 'a14', turmaId: '3', nome: 'Nicolas Pereira Santos', foto: null }
-        ]
-      };
+    async function carregarDados() {
+      try {
+        const response = await fetch('dados_alunos.json');
+        const data = await response.json();
+        dados = { turmas: data.turmas, alunos: data.alunos };
+        console.log(`✓ Carregados: ${data.total_turmas} turmas, ${data.total_alunos} alunos`);
+        carregarLocal();
+      } catch (err) {
+        console.error('Erro ao carregar dados:', err);
+        alert('⚠️ Certifique-se de que o arquivo dados_alunos.json está na mesma pasta.');
+      }
+    }
+
+    function loginAdmin() {
+      const password = document.getElementById('password-input').value;
+      if (password === '2026') {
+        isAdmin = true;
+        entrarApp();
+      } else {
+        mostrarErro('❌ Senha incorreta! Use "2026".');
+      }
+    }
+
+    function loginVisitor() {
+      isAdmin = false;
+      entrarApp();
+    }
+
+    function mostrarErro(msg) {
+      const errorEl = document.getElementById('login-error');
+      errorEl.textContent = msg;
+      errorEl.classList.add('show');
+      setTimeout(() => errorEl.classList.remove('show'), 4000);
+    }
+
+    function entrarApp() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('user-badge').textContent = isAdmin ? '🔐 Administrador' : '👁 Visitante';
       renderizar();
     }
 
-    // ════════════════════════════════════════════════════════════════
-    // INTERFACE
-    // ════════════════════════════════════════════════════════════════
+    function logout() {
+      if (confirm('Deseja sair?')) {
+        isAdmin = false;
+        turmaAtiva = null;
+        alunosEditar = [];
+        document.getElementById('login-screen').classList.remove('hidden');
+        document.getElementById('app').style.display = 'none';
+        document.getElementById('password-input').value = '';
+      }
+    }
+
     function renderizar() {
       const container = document.getElementById('turmas-container');
       container.innerHTML = '';
-
-      if (dados.turmas.length === 0) {
-        document.getElementById('empty-state').style.display = 'block';
-        return;
-      }
 
       dados.turmas.forEach(turma => {
         const alunos = dados.alunos.filter(a => a.turmaId === turma.id);
@@ -709,51 +738,30 @@
 
         const card = document.createElement('div');
         card.className = 'turma-card';
+
+        const preview = alunos.slice(0, 3).map(aluno => `
+          <div class="aluno-preview">
+            <div class="avatar">
+              ${aluno.foto ? `<img src="${aluno.foto}">` : getInitiais(aluno.nome)}
+            </div>
+            <div style="flex: 1; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${aluno.nome}</div>
+            <span style="font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 600; background: ${aluno.foto ? '#d1fae5' : '#fef3c7'}; color: ${aluno.foto ? '#047857' : '#b45309'};">${aluno.foto ? '✓' : '⚠'}</span>
+          </div>
+        `).join('');
+
         card.innerHTML = `
           <div class="turma-header">
-            <div class="turma-name">
-              <span>🎓</span>
-              ${turma.nome}
-            </div>
+            <div class="turma-name">🎓 ${turma.nome}</div>
             <div class="turma-stats">
-              <div class="stat-item">
-                <span>👥</span>
-                <span>${totalAlunos} alunos</span>
-              </div>
-              <div class="stat-item">
-                <span>📸</span>
-                <span>${comFoto} com foto</span>
-              </div>
+              <div>👥 ${totalAlunos}</div>
+              <div>📸 ${comFoto}</div>
             </div>
           </div>
           <div class="turma-body">
-            <div class="alunos-list">
-              ${alunos.slice(0, 3).map(aluno => `
-                <div class="aluno-item">
-                  <div class="aluno-avatar">
-                    ${aluno.foto 
-                      ? `<img src="${aluno.foto}" alt="${aluno.nome}">` 
-                      : getInitiais(aluno.nome)
-                    }
-                  </div>
-                  <div class="aluno-info">
-                    <div class="aluno-name">${aluno.nome}</div>
-                    <div class="aluno-status">
-                      <span class="aluno-badge ${aluno.foto ? 'badge-com-foto' : 'badge-sem-foto'}">
-                        ${aluno.foto ? '✓ Com foto' : '⚠ Sem foto'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              `).join('')}
-              ${totalAlunos > 3 ? `
-                <div style="text-align: center; padding: 8px; color: var(--text-sec); font-size: 12px; font-weight: 600;">
-                  ... e ${totalAlunos - 3} alunos mais
-                </div>
-              ` : ''}
-            </div>
-            <button class="turma-btn" onclick="abrirTurma('${turma.id}')">
-              ⚙ Gerenciar Fotos (${comFoto}/${totalAlunos})
+            <div class="alunos-preview">${preview}</div>
+            ${totalAlunos > 3 ? `<div style="text-align: center; font-size: 12px; color: var(--text-sec); padding: 8px;">... e ${totalAlunos - 3} alunos mais</div>` : ''}
+            <button class="turma-btn ${!isAdmin ? 'disabled' : ''}" onclick="abrirTurma('${turma.id}')" ${!isAdmin ? 'disabled' : ''}>
+              ⚙ Gerenciar (${comFoto}/${totalAlunos})
             </button>
           </div>
         `;
@@ -762,54 +770,37 @@
     }
 
     function abrirTurma(turmaId) {
+      if (!isAdmin) return;
+
       turmaAtiva = dados.turmas.find(t => t.id === turmaId);
-      alunosEditar = dados.alunos
-        .filter(a => a.turmaId === turmaId)
-        .map(a => ({ ...a }));
+      alunosEditar = dados.alunos.filter(a => a.turmaId === turmaId).map(a => ({ ...a }));
 
-      const turmaName = document.getElementById('modal-turma-name');
-      turmaName.textContent = turmaAtiva.nome;
+      document.getElementById('modal-title').textContent = turmaAtiva.nome;
 
-      const list = document.getElementById('modal-alunos-list');
+      const list = document.getElementById('alunos-list');
       list.innerHTML = '';
 
       alunosEditar.forEach((aluno, idx) => {
         const item = document.createElement('div');
-        item.className = 'aluno-detail';
+        item.className = 'aluno-card';
         item.innerHTML = `
           <div class="foto-box" onclick="uploadFoto(${idx})">
-            ${aluno.foto 
-              ? `<img src="${aluno.foto}" alt="${aluno.nome}">` 
-              : `<div class="foto-placeholder">${getInitiais(aluno.nome)}</div>`
-            }
+            ${aluno.foto ? `<img src="${aluno.foto}">` : `<div class="foto-placeholder">${getInitiais(aluno.nome)}</div>`}
           </div>
-          <div class="aluno-detail-info">
-            <div class="aluno-detail-name">${aluno.nome}</div>
-            <div class="aluno-detail-status">ID: ${aluno.id}</div>
-            <span class="foto-indicator ${aluno.foto ? 'tem' : 'sem'}">
+          <div class="aluno-info">
+            <div class="aluno-info-name">${aluno.nome}</div>
+            <div style="font-size: 12px; color: var(--text-sec); margin-bottom: 6px;">ID: ${aluno.id}</div>
+            <span class="badge-status ${aluno.foto ? 'com' : 'sem'}">
               ${aluno.foto ? '✓ Com foto' : '⚠️ Sem foto'}
             </span>
           </div>
-          <input type="file" id="file-${idx}" class="foto-input" accept="image/*" 
-            onchange="handleFotoUpload(${idx}, this)">
+          <input type="file" id="file-${idx}" class="foto-input" accept="image/*" onchange="handleFotoUpload(${idx}, this)">
         `;
         list.appendChild(item);
       });
 
-      const comFoto = alunosEditar.filter(a => a.foto).length;
-      const total = alunosEditar.length;
-
-      list.innerHTML += `
-        <div style="margin-top: 20px; padding: 16px; background: var(--bg); border-radius: 12px;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px;">
-            Progresso: ${comFoto} de ${total} com foto (${Math.round((comFoto/total)*100)}%)
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${(comFoto/total)*100}%"></div>
-          </div>
-        </div>
-      `;
-
+      atualizarProgresso();
+      atualizarBotoes();
       document.getElementById('modal-turma').classList.add('active');
     }
 
@@ -829,68 +820,70 @@
       const reader = new FileReader();
       reader.onload = (e) => {
         alunosEditar[idx].foto = e.target.result;
-
-        // Atualizar visual
-        const fotoDB = document.querySelectorAll('.foto-box')[idx];
-        fotoDB.innerHTML = `<img src="${e.target.result}" alt="">`;
-
-        const indicator = document.querySelectorAll('.foto-indicator')[idx];
-        indicator.className = 'foto-indicator tem';
-        indicator.textContent = '✓ Com foto';
-
-        mostrarMensagem('✓ Foto adicionada!', 'success');
-        abrirTurma(turmaAtiva.id); // Atualizar modal
+        abrirTurma(turmaAtiva.id);
+        mostrarMensagem('✓ Foto adicionada!');
       };
       reader.readAsDataURL(input.files[0]);
     }
 
-    function salvarTurma() {
-      if (!confirm('Salvar todas as fotos desta turma?')) return;
+    function atualizarProgresso() {
+      const comFoto = alunosEditar.filter(a => a.foto).length;
+      const total = alunosEditar.length;
+      const pct = total ? Math.round((comFoto / total) * 100) : 0;
 
-      // Atualizar dados principais
+      document.getElementById('progress-section').style.display = 'block';
+      document.getElementById('progress-text').textContent = `${comFoto} de ${total} (${pct}%)`;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+    }
+
+    function salvarTurma() {
+      if (!confirm('💾 Salvar todas as fotos desta turma?')) return;
+
       alunosEditar.forEach(aluno => {
         const idx = dados.alunos.findIndex(a => a.id === aluno.id);
-        if (idx >= 0) {
-          dados.alunos[idx].foto = aluno.foto;
-        }
+        if (idx >= 0) dados.alunos[idx].foto = aluno.foto;
       });
 
-      mostrarMensagem('✓ Turma salva com sucesso!', 'success');
+      salvarLocal();
+      mostrarMensagem('✓ Turma salva com sucesso!');
       fecharModal();
       renderizar();
     }
 
-    // ════════════════════════════════════════════════════════════════
-    // UTILITIES
-    // ════════════════════════════════════════════════════════════════
-    function getInitiais(nome) {
-      return nome
-        .split(' ')
-        .slice(0, 2)
-        .map(n => n[0])
-        .join('')
-        .toUpperCase();
+    function atualizarBotoes() {
+      document.getElementById('modal-actions').innerHTML = `
+        <button class="modal-btn save" onclick="salvarTurma()">💾 Salvar Fotos</button>
+        <button class="modal-btn close" onclick="fecharModal()">Fechar</button>
+      `;
     }
 
-    function mostrarMensagem(texto, tipo = 'info') {
+    function getInitiais(nome) {
+      return nome.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
+    }
+
+    function mostrarMensagem(texto) {
       const container = document.getElementById('status-container');
       const msg = document.createElement('div');
-      msg.className = `status-bar ${tipo}`;
+      msg.className = 'status-bar';
       msg.textContent = texto;
       container.appendChild(msg);
-
       setTimeout(() => msg.remove(), 3000);
     }
 
-    // ════════════════════════════════════════════════════════════════
-    // INIT
-    // ════════════════════════════════════════════════════════════════
+    function salvarLocal() {
+      localStorage.setItem('galeria_fotos', JSON.stringify(dados));
+    }
+
+    function carregarLocal() {
+      const saved = localStorage.getItem('galeria_fotos');
+      if (saved) dados.alunos = JSON.parse(saved).alunos;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      carregarDados();
       document.getElementById('modal-turma').addEventListener('click', (e) => {
         if (e.target === e.currentTarget) fecharModal();
       });
-
-      carregarDadosExemplo();
     });
   </script>
 </body>
